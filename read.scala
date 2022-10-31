@@ -23,6 +23,9 @@ object SparkApplication extends App {
         //filtering people who are females & whose age are greater than 40
         val femaleOlderDf=df.filter(df("Sex") === "F" && df("Age") > 40)
 
+        //filtering tall males
+        val tallMalesDf=df.filter(df("Sex")==="M" && df("Height (in)") > "65")
+
         //calculating overweight
         val overweight=df.withColumn("isOverweight",
             when(col("Weight (lbs)")>70,"Overweight")
@@ -30,6 +33,9 @@ object SparkApplication extends App {
             .otherwise("Lightweight"))
 
         df.join(anotherDf,Seq("Name"),"inner")
+
+        df.join(anotherDf,Seq("Name"),"full outer")
+
         
         overweight
         .write
