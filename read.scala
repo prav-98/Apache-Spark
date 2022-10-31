@@ -6,10 +6,16 @@ object SparkApplication extends App {
       .getOrCreate();
 
     
-      val df=spark.spark.read
+      val df=spark.read
           .option("delimiter", ",")
           .option("header", true)
           .csv("/Users/ayomalpraveen/Desktop/Apache-Spark-Code/Samples/first.csv")
+
+        val anotherDf=spark.read
+          .option("delimiter", ",")
+          .option("header", true)
+          .csv("/Users/ayomalpraveen/Desktop/Apache-Spark-Code/Samples/second.csv")
+
 
         //filtering the males
         val maledf=df.filter($"SEX" === "M").show(10)
@@ -23,7 +29,7 @@ object SparkApplication extends App {
             .when(col("Weight (lbs)")>50 && "Weight (lbs)"<70,"Normal Weight")
             .otherwise("Lightweight"))
 
-        
+        df.join(anotherDf,Seq("Name"),"inner")
         
         overweight
         .write
