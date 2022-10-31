@@ -23,4 +23,12 @@ object SparkApplication extends App {
             .when(col("Weight (lbs)")>50 && "Weight (lbs)"<70,"Normal Weight")
             .otherwise("Lightweight"))
 
+        
+        
+        overweight
+        .write
+        .mode(SaveMode.Overwrite)
+        .option("header", true)
+        .csv("/Users/ayomalpraveen/Desktop/Apache-Spark-Code/output")
+
     }
