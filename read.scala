@@ -9,6 +9,18 @@ object SparkApplication extends App {
       val df=spark.spark.read
           .option("delimiter", ",")
           .option("header", true)
-          .csv()
+          .csv("/Users/ayomalpraveen/Desktop/Apache-Spark-Code/Samples/first.csv")
+
+        //filtering the males
+        val maledf=df.filter($"SEX" === "M").show(10)
+
+        //filtering people who are females & whose age are greater than 40
+        val femaleOlderDf=df.filter(df("Sex") === "F" && df("Age") > 40)
+
+        //calculating overweight
+        val overweight=df.withColumn("isOverweight",
+            when(col("Weight (lbs)")>70,"Overweight")
+            .when(col("Weight (lbs)")>50 && "Weight (lbs)"<70,"Normal Weight")
+            .otherwise("Lightweight"))
 
     }

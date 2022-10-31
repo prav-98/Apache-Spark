@@ -10358,3 +10358,5 @@ Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 890 out of bounds for
 	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
 	... 3 more
 
+2022.10.31 20:27:08 WARN  no build target for: /Users/ayomalpraveen/Desktop/Apache-Spark-Code/read.scala
+2022.10.31 20:27:08 INFO  skipping build import with status 'Requested'
